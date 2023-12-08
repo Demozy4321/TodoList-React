@@ -18,7 +18,7 @@ const TodoItem = (props) => {
   const deleteTask = async (id) => {
     try {
       let res = await axiosInstance.post(
-        `http://localhost:4321/api/v1/todo/deleteTodo?itemId=${id}`
+        `https://todo-app-service-utsu.onrender.com//api/v1/todo/deleteTodo?itemId=${id}`
       );
 
       if (res.data.status) {

@@ -14,7 +14,7 @@ const ToDoListView = () => {
   const getTaskList = async () => {
     try {
       let res = await axiosInstance.get(
-        `http://localhost:4321/api/v1/todo/allTodos?email=${userEmail}`
+        `https://todo-app-service-utsu.onrender.com//api/v1/todo/allTodos?email=${userEmail}`
       );
 
       if (res.data.status) {
