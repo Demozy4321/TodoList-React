@@ -20,7 +20,7 @@ const AddModal = ({ open, setOpen, getTodoList }) => {
     };
     try {
       let res = await axiosInstance.post(
-        "https://todo-app-service-utsu.onrender.com//api/v1/todo/addTodo",
+        "https://todo-app-service-utsu.onrender.com/api/v1/todo/addTodo",
         formData
       );
 

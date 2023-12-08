@@ -31,7 +31,7 @@ const EditTodoModal = ({ open, setOpen, getTodoList, todoItem }) => {
 
     try {
       let res = await axiosInstance.post(
-        `https://todo-app-service-utsu.onrender.com//api/v1/todo/completeTodo?itemId=${todoItem.todoId}`
+        `https://todo-app-service-utsu.onrender.com/api/v1/todo/completeTodo?itemId=${todoItem.todoId}`
       );
 
       if (res.data.status) {
@@ -53,7 +53,7 @@ const EditTodoModal = ({ open, setOpen, getTodoList, todoItem }) => {
 
     try {
       let res = await axiosInstance.post(
-        `https://todo-app-service-utsu.onrender.com//api/v1/todo/editTodo`,
+        `https://todo-app-service-utsu.onrender.com/api/v1/todo/editTodo`,
         formData
       );
 
@@ -69,7 +69,7 @@ const EditTodoModal = ({ open, setOpen, getTodoList, todoItem }) => {
   const getTaskItem = async (itemId) => {
     try {
       let res = await axiosInstance.get(
-        `https://todo-app-service-utsu.onrender.com//api/v1/todo/getTodoItem?itemId=${itemId}`
+        `https://todo-app-service-utsu.onrender.com/api/v1/todo/getTodoItem?itemId=${itemId}`
       );
 
       if (res.data.status) {
