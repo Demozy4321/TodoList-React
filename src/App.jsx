@@ -5,13 +5,18 @@ import Sidebar from "./components/Sidebar";
 import Dashboard from "./pages/Dashboard";
 import { Route, Routes } from "react-router-dom";
 import ToDoListView from "./pages/ToDoListView";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import MainPage from "./pages/MainPage";
+import { useSelector } from "react-redux";
 
 function App() {
-  const [user, setUser] = useState(false);
+  const { isLoggedIn } = useSelector((state) => state.user);
 
-  if (user) {
+  useEffect(() => {
+    console.log(isLoggedIn);
+  }, [isLoggedIn]);
+
+  if (isLoggedIn) {
     return (
       <Stack>
         <Header />

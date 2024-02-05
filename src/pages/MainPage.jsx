@@ -1,7 +1,20 @@
 import { Button, Stack, TextField } from "@mui/material";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { setUser } from "../redux/reducers/UserReducer";
 
 const MainPage = () => {
+  const userDetails = useSelector((state) => state.user);
+  const dispatch = useDispatch();
+
+  const demoData = {
+    email: "demo@gmail.com",
+    fullName: "demo",
+    userName: "demo",
+    createdOn: "ttt",
+    updatedOn: "asdf",
+  };
+
   const [formData, setFormData] = useState({
     email: "",
     password: "",
@@ -13,9 +26,11 @@ const MainPage = () => {
       ...formData,
       [name]: value,
     });
-
-    console.log(e.target.value);
   };
+
+  useEffect(() => {
+    console.log(userDetails);
+  }, []);
 
   const handleFormSubmit = (e) => {
     e.preventDefault();
@@ -25,6 +40,8 @@ const MainPage = () => {
       if success then set the user reducer
       if failed then show error - credentials doesn't match
     */
+
+    dispatch(setUser(demoData));
   };
 
   return (
