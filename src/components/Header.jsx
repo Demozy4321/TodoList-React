@@ -13,19 +13,29 @@ import Tooltip from "@mui/material/Tooltip";
 import MenuItem from "@mui/material/MenuItem";
 import AdbIcon from "@mui/icons-material/Adb";
 import { Stack } from "@mui/material";
+import { useDispatch, useSelector } from "react-redux";
+import { logOutUser } from "../redux/reducers/UserReducer";
 
 const pages = ["Products", "Pricing", "Blog"];
 const settings = ["Profile", "Account", "Dashboard", "Logout"];
 
 const Header = () => {
   const [anchorElUser, setAnchorElUser] = React.useState(null);
+  const isLoggedIn = useSelector((state) => state.user);
+  const dispatch = useDispatch();
 
   const handleOpenUserMenu = (event) => {
     setAnchorElUser(event.currentTarget);
   };
 
-  const handleCloseUserMenu = () => {
+  const handleCloseUserMenu = (setting) => {
     setAnchorElUser(null);
+    console.log(setting);
+
+    if (setting === "Logout") {
+      dispatch(logOutUser());
+      console.log(isLoggedIn);
+    }
   };
 
   return (
@@ -81,7 +91,11 @@ const Header = () => {
             open={Boolean(anchorElUser)}
             onClose={handleCloseUserMenu}>
             {settings.map((setting) => (
-              <MenuItem key={setting} onClick={handleCloseUserMenu}>
+              <MenuItem
+                key={setting}
+                onClick={() => {
+                  handleCloseUserMenu(setting);
+                }}>
                 <Typography textAlign="center">{setting}</Typography>
               </MenuItem>
             ))}

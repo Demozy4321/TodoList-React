@@ -2,6 +2,7 @@ import { Button, Stack, TextField } from "@mui/material";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { setUser } from "../redux/reducers/UserReducer";
+import axios from "axios";
 
 const MainPage = () => {
   const userDetails = useSelector((state) => state.user);
@@ -28,11 +29,7 @@ const MainPage = () => {
     });
   };
 
-  useEffect(() => {
-    console.log(userDetails);
-  }, []);
-
-  const handleFormSubmit = (e) => {
+  const handleFormSubmit = async (e) => {
     e.preventDefault();
 
     /*
@@ -40,6 +37,20 @@ const MainPage = () => {
       if success then set the user reducer
       if failed then show error - credentials doesn't match
     */
+
+    try {
+      let res = await axios.post(
+        "http://localhost:8081/auth/userLogin",
+        formData
+      );
+
+      if (res.data && res.data.status) {
+        dispatch(setUser(res.data.data));
+      }
+      console.log(res);
+    } catch (error) {
+      console.log(error);
+    }
 
     dispatch(setUser(demoData));
   };
